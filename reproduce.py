@@ -48,7 +48,9 @@ def prepare():
     if not target.is_relative_to(WORK.resolve()) or not (m.isfile() or m.isdir()):raise SystemExit('Unsafe archive member: '+m.name)
     if m.isdir():target.mkdir(parents=True,exist_ok=True);continue
     target.parent.mkdir(parents=True,exist_ok=True)
-    with t.extractfile(m) as src,target.open('wb') as dst:shutil.copyfileobj(src,dst)
+    temp=target.with_name(target.name+'.extracting')
+    with t.extractfile(m) as src,temp.open('wb') as dst:shutil.copyfileobj(src,dst)
+    temp.replace(target)
  for row in json.loads((ROOT/'file_manifest.json').read_text()):
   if sha(WORK/row['path'])!=row['sha256']:raise SystemExit('Snapshot file hash mismatch: '+row['path'])
  run(['python3',ROOT/'tools/relocate.py',WORK,assets['archive_workspace']])

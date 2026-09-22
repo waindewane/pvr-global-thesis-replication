@@ -14140,6 +14140,11 @@
     "sha256": "b86522f4a7dd73d75eddac3358ae1a1e6340e00e583b0971b66f0b2c7f4656e4"
   },
   {
+    "path": "docs/governance/P15_PEER_GEOGRAPHY_COMPARISON_DESIGN_2026-09-09.md",
+    "bytes": 3669,
+    "sha256": "fd35c35a1892eab96271b62647822b35f193e739265de197e788a56a92b64265"
+  },
+  {
     "path": "docs/governance/P15_POLICY_COMPARISON_PROTOCOL_2026-09-08.md",
     "bytes": 4085,
     "sha256": "369819d0328e8850765275b68513dcfc9c71c72f5849ba6233bfb2a6b16d7a78"

@@ -51,5 +51,15 @@ for iteration in range(15):
    walk(x)
    if dirty[0]:p.write_text(json.dumps(x,indent=2)+'\n');updates+=1;changed.add(str(p.relative_to(root)))
  if not updates:break
+# Reader-facing sources can contain absolute figure links. Their text is already
+# verified against the release manifest; update only the relocated source hashes.
+accepted=root/'docs/thesis_design/manuscript/accepted_sections.json'
+if accepted.exists():
+ a=json.loads(accepted.read_text());dirty=False
+ for section in a['sections']:
+  h=sha(root/section['path'])
+  if section.get('accepted_sha256')!=h:
+   section['accepted_sha256']=h;dirty=True
+ if dirty:accepted.write_text(json.dumps(a,indent=2)+'\n');changed.add(str(accepted.relative_to(root)))
 (root/'relocation_record.json').write_text(json.dumps({'provenance_only':True,'old_root':old,'new_root':str(root),'iterations':iteration+1,'changed':sorted(changed)},indent=2)+'\n')
 print('Rebased metadata in',len(changed),'files; last pass updated',updates)

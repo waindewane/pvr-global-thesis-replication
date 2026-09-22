@@ -1,0 +1,26 @@
+source("../../R/p15_deeper_assessment.R")
+testthat::test_that("opposite directions exclude zeros and missing bridges",{
+  testthat::expect_equal(p15_deep_sign_disagreement(c(1,-2,0,1),c(-1,-1,1,NA)),c(TRUE,FALSE,NA,NA))
+})
+testthat::test_that("cluster bootstrap is deterministic and handles sparse samples",{
+  z<-p15_deep_boot_mean(c(1,-1,4,6),c("A","A","B","B"),B=99)
+  testthat::expect_equal(z$mean,2.5)
+  testthat::expect_equal(z,p15_deep_boot_mean(c(1,-1,4,6),c("A","A","B","B"),B=99))
+  testthat::expect_true(z$low<=z$mean&z$high>=z$mean)
+  testthat::expect_true(is.na(p15_deep_boot_mean(numeric(),character())$mean))
+  testthat::expect_true(is.na(p15_deep_boot_mean(2,"A")$low))
+})
+testthat::test_that("fixed pool deletion does not silently relax the minimum",{
+  a<-p15_deep_pool_removal(c(2,4,8));b<-p15_deep_pool_removal(c(2,4,8,10))
+  testthat::expect_true(all(!a$minimum_still_met))
+  testthat::expect_equal(a$arithmetic_median_after_removal,c(6,5,3))
+  testthat::expect_true(all(b$minimum_still_met))
+  testthat::expect_equal(b$original_rate,rep(6,4))
+})
+testthat::test_that("composition separates disappearing high-rate cases exactly",{
+  z<-p15_deep_composition(c(1,3,10),c(2,4),c("A","B","C"),c("A","B"))
+  testthat::expect_equal(z$common_country_change,1)
+  testthat::expect_equal(z$prior_composition,-8/3)
+  testthat::expect_equal(z$total_mean_change,z$common_country_change+z$current_composition+z$prior_composition)
+  testthat::expect_error(p15_deep_composition(c(1,2),3,c("A","A"),"B"))
+})

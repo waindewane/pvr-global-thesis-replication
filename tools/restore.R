@@ -1,0 +1,5 @@
+lib<-file.path(getwd(),'renv/library/p15-locked')
+dir.create(lib,recursive=TRUE,showWarnings=FALSE)
+.libPaths(c(lib,.libPaths()))
+if(!requireNamespace('renv',quietly=TRUE))install.packages('renv',repos='https://cloud.r-project.org',lib=lib)
+renv::restore(project=getwd(),lockfile='../environment.lock',library=lib,prompt=FALSE)

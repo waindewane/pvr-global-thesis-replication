@@ -1,0 +1,122 @@
+{
+  "title": "Borrower-Specific Sovereign Borrowing Conditions and Concessionality",
+  "subtitle": "Working thesis draft \u00b7 Chapters 2\u20138",
+  "author": "Markus Wane",
+  "date": "22 September 2026",
+  "format_reference": "literature-review/synthesis/literature_review_lr49_measure_family_clarity.Rmd",
+  "chapters": {
+    "2": "Concepts, institutional uses and related research",
+    "3": "Constructing the sovereign market-benchmark dataset",
+    "4": "Evaluating the borrowing-rate benchmarks",
+    "5": "Borrowing conditions across countries and over time, 2012\u20132024",
+    "6": "Official-loan data and concessionality calculations",
+    "8": "Discussion and conclusion"
+  },
+  "sections": [
+    {
+      "chapter": 2,
+      "path": "docs/thesis_design/sections/concepts_and_related_research/first_two_subsections.md",
+      "accepted_sha256": "b1272738c01559a662d075357ccb6d5d32461813617fd436bd5b47d37741f89e"
+    },
+    {
+      "chapter": 2,
+      "path": "docs/thesis_design/sections/concepts_and_related_research/institutional_subsection.md",
+      "accepted_sha256": "3f21d16dd3fc45b3d073e2549539da2edad5b22425b48b2f0f145c599451740d"
+    },
+    {
+      "chapter": 2,
+      "path": "docs/thesis_design/sections/concepts_and_related_research/related_research_subsection.md",
+      "accepted_sha256": "74a5c257befa86e97fd904d1c94fb72c022320abb060542d2ccc24549712cde1"
+    },
+    {
+      "chapter": 3,
+      "path": "docs/thesis_design/sections/dataset_construction/scope_and_contents.md",
+      "accepted_sha256": "3beb9b7d806102e17d47239c3ffcb0f63a6bddeb41f0d468e1641bac6b8aca58"
+    },
+    {
+      "chapter": 3,
+      "path": "docs/thesis_design/sections/dataset_construction/observed_bond_evidence.md",
+      "accepted_sha256": "7ebf749b1b4368953951c6f873b3775a43d67ae5db459c6404472a20e4f2c094"
+    },
+    {
+      "chapter": 3,
+      "path": "docs/thesis_design/sections/dataset_construction/ids_borrowing_terms.md",
+      "accepted_sha256": "909ceba9af49cf269fd2a8949ec6c1ee89f4b8c796d1cb0aa6832a3e201c7a06"
+    },
+    {
+      "chapter": 3,
+      "path": "docs/thesis_design/sections/dataset_construction/rating_implied_rates.md",
+      "accepted_sha256": "a79b81688fd7a3b07c2fd7aac3a34fa647bca3c2a6b0436558d1b9820e45e60a"
+    },
+    {
+      "chapter": 3,
+      "path": "docs/thesis_design/sections/dataset_construction/peer_based_approximations.md",
+      "accepted_sha256": "3ed274e2143240d5201bc0ebffd562385f0ef1fd09d4244e1a3bf5e7db7f0ede"
+    },
+    {
+      "chapter": 3,
+      "path": "docs/thesis_design/sections/dataset_construction/reference_selection.md",
+      "accepted_sha256": "6d300bdeece6ae2c7740eddaaf150bc88d951ec4b30f0bf91c2a5c078e64727d"
+    },
+    {
+      "chapter": 3,
+      "path": "docs/thesis_design/sections/dataset_construction/construction_example_and_close.md",
+      "accepted_sha256": "e8606ceb0a20d71f7c826ad4a121639815bd8cc0347b8e253c65144c25d2bba7"
+    },
+    {
+      "chapter": 4,
+      "path": "docs/thesis_design/sections/benchmark_evaluation/evaluation_design.md",
+      "accepted_sha256": "e802cd831cc291a4603876c441daa92686a40e0ac21fed3423a367b39c7d98f8"
+    },
+    {
+      "chapter": 4,
+      "path": "docs/thesis_design/sections/benchmark_evaluation/coverage_and_sources.md",
+      "accepted_sha256": "6565060ff4bb07a17aabb148a44e945285e0e55b1597890f05986cdb62f17304"
+    },
+    {
+      "chapter": 4,
+      "path": "docs/thesis_design/sections/benchmark_evaluation/accuracy_relative_to_policy.md",
+      "accepted_sha256": "6a2c13e23208d48963332932b7b7da113d4924bd08ff9709e00e40815fde07d7"
+    },
+    {
+      "chapter": 4,
+      "path": "docs/thesis_design/sections/benchmark_evaluation/source_comparability.md",
+      "accepted_sha256": "3006f4513daef5d6193ae1727b8954aa195f0d30e8a61ab8ad797be33de5a5e9"
+    },
+    {
+      "chapter": 4,
+      "path": "docs/thesis_design/sections/benchmark_evaluation/applicability_and_calibration.md",
+      "accepted_sha256": "431b49063669167c06deefd67f7fe42e932d45860305e3107487ce82d94d4f9f"
+    },
+    {
+      "chapter": 4,
+      "path": "docs/thesis_design/sections/benchmark_evaluation/annual_levels_and_changes.md",
+      "accepted_sha256": "f5c4cba493c1c1aed55df43064305aaebaf26dea10c5c86b4d408b0bd23a337a"
+    },
+    {
+      "chapter": 5,
+      "path": "docs/thesis_design/sections/borrowing_conditions/changes_and_dispersion.md",
+      "accepted_sha256": "b0cae7069c4b9dc035536cde4d320ff8d19c7dc75ebe4a382da3f5252e49a1fc"
+    },
+    {
+      "chapter": 5,
+      "path": "docs/thesis_design/sections/borrowing_conditions/regional_differences.md",
+      "accepted_sha256": "f87e52e30a58f6943f37ddcc228f8fc32b8516219cd34e2fd3c10ca89b9c6aa5"
+    },
+    {
+      "chapter": 5,
+      "path": "docs/thesis_design/sections/borrowing_conditions/borrower_characteristics.md",
+      "accepted_sha256": "741ac1581117a7fec8e83270c6862b74920d2e1c185c85d33a925ed16303bc03"
+    },
+    {
+      "chapter": 6,
+      "path": "docs/thesis_design/sections/official_loan_data_and_valuation/official_loan_data_and_concessionality.md",
+      "accepted_sha256": "d0c5835f7fc5e5e5400e09886679f2505717bc3f95644a89072fd096d5e5193e"
+    },
+    {
+      "chapter": 8,
+      "path": "docs/thesis_design/sections/discussion_and_conclusion/discussion_and_conclusion.md",
+      "accepted_sha256": "1e3691e17edc6f02af6fc3129b25ade9027c307f9a11887fb583fb4812459c49"
+    }
+  ]
+}

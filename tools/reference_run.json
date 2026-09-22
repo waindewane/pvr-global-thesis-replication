@@ -1,0 +1,32 @@
+{
+  "candidate": "data-derived/p15_master/raw_revised_peer_e989e6f17fa2b6221b55/candidate",
+  "stages": {
+    "assessment": "data-derived/p15_master/assessment_204696f821c5bf079828",
+    "deeper": "data-derived/p15_master/deeper_011ffb4b280707a20b7a",
+    "regional": "data-derived/p15_master/regional_55b123e7b53a199cdfc1",
+    "policy": "data-derived/p15_master/policy_68b0be583811f9dba676",
+    "dac": "data-derived/p15_master/dac_72513402f38eeffa6701",
+    "official_policy": "data-derived/p15_master/official_policy_f405e89f9e6ef201f181",
+    "pv_first": "data-derived/p15_master/pv_first_a5c3433fd95ac4d43e0e",
+    "bullet": "data-derived/p15_master/bullet_47112ef20295e323eeb6",
+    "pv_interpretation": "data-derived/p15_master/pv_interpretation_69ef58233f353fdd847e",
+    "pv_followup": "data-derived/p15_master/pv_followup_7eb60ac4516707826594",
+    "pv_three_block": "data-derived/p15_master/pv_three_block_bcffc295578b5144bbe8",
+    "peer_geography_validation": "data-derived/p15_master/peer_geography_validation_e99ea4fa51215ee3b5ad",
+    "benchmark_inference": "data-derived/p15_master/benchmark_inference_d24abfe1c2a0525eba05",
+    "repayment_influence": "data-derived/p15_master/repayment_influence_092ac6aadb911609e6cb",
+    "loan_comparisons": "data-derived/p15_master/loan_comparisons_ea81228982877b31b8c3",
+    "loan_period_inference": "data-derived/p15_master/loan_period_inference_c3cc6f0812d30e594879",
+    "regional_followup": "data-derived/p15_master/regional_followup_d3c98dca0207bede05ee",
+    "statistical_review": "data-derived/p15_master/statistical_review_a7f047573ae86bf6af1d",
+    "crs_application": "data-derived/p15_master/crs_application_853ecc373e35933639e1",
+    "source_overlap_currency": "data-derived/p15_master/source_overlap_currency_824d66009285d3d63509",
+    "crs_companions": "data-derived/p15_master/crs_companions_129eadfdef440840f71f",
+    "crs_modern_summary": "data-derived/p15_master/crs_modern_summary_b8d47c000fabe7d6934b",
+    "gbohoui_context": "data-derived/p15_master/gbohoui_context_979804fe61e480ccc24b",
+    "panel_disbursement": "data-derived/p15_master/panel_disbursement_014b4845482e66fffb96",
+    "rating_nested": "data-derived/p15_master/rating_nested_2d7f042aedb8ab84f1df",
+    "peer_description": "data-derived/p15_master/peer_description_7e79cc532d8d5609688d",
+    "rating_gap_influence": "data-derived/p15_master/rating_gap_influence_742f22abdd1a78ba91a0"
+  }
+}

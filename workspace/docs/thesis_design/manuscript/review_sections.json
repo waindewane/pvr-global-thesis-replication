@@ -1,0 +1,20 @@
+{
+  "purpose": "Complete review copy, including newly drafted introduction/abstract and Chapter 7 without promoting their acceptance status. Chapter 8 accepted 22 September 2026.",
+  "chapters": {
+    "1": "Introduction",
+    "7": "How borrower-specific rates change measured concessionality"
+  },
+  "sections": [
+    {
+      "chapter": 1,
+      "path": "docs/thesis_design/sections/introduction/introduction.md"
+    },
+    {
+      "chapter": 7,
+      "path": "docs/thesis_design/sections/concessionality_results/concessionality_findings.md"
+    }
+  ],
+  "abstract": "docs/thesis_design/sections/introduction/abstract.md",
+  "cover": "docs/thesis_design/submission_preparation_20260922/official_cover_filled.pdf",
+  "format_decision": "Owner explicitly retains 10pt on 22 September 2026 despite department 12pt recommendation."
+}

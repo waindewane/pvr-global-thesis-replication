@@ -1,0 +1,30 @@
+#!/usr/bin/env Rscript
+source("scripts/p15/activate_p15_environment.R")
+source("scripts/p15/annotation_followup_20260911/statistical_helpers.R")
+suppressPackageStartupMessages(library(data.table))
+testthat::test_that("signed cancellation does not hide the size of errors", {
+ d<-data.table(iso3=c("A","B"),analysis_year=c(2020L,2020L),focal_error=c(-4,4),comparator_error=c(-1,1))
+ z<-stat_error_metrics(d)
+ testthat::expect_equal(z$focal_bias_pp,0)
+ testthat::expect_equal(z$focal_mae_pp,4)
+ testthat::expect_equal(z$focal_rmse_pp,4)
+ testthat::expect_equal(z$improvement_pp,-3)
+})
+testthat::test_that("fixed method changes are compared on the same loan support", {
+ d<-data.table(iso3=c("A","A"),commitment_year=c(2020L,2023L),selected_gap_pp=c(0,10),fixed_gap_pp=c(1,13))
+ z<-stat_period_means(d)
+ testthat::expect_equal(z$selected_contrast_pp,10)
+ testthat::expect_equal(z$fixed_contrast_pp,12)
+ testthat::expect_equal(z$method_component_pp,2)
+ testthat::expect_equal(z$common_countries,1L)
+})
+testthat::test_that("one-period countries do not identify a country-fixed-effect period coefficient", {
+ d<-data.table(iso3=c("A","A","B","B","C","C"),commitment_year=c(2020L,2023L,2020L,2023L,2019L,2020L),
+ delta_ge_pp=c(0,2,10,14,100,100))
+ z<-stat_period_design(d)
+ testthat::expect_equal(z$fe$within_country_fe_contrast_pp,3)
+ testthat::expect_equal(z$fe$identifying_common_countries,2L)
+ testthat::expect_equal(z$fe$identifying_common_records,4L)
+ testthat::expect_equal(z$fe$within_country_fe_contrast_pp,z$fe$independent_lm_fe_contrast_pp,tolerance=1e-10)
+ testthat::expect_equal(z$cluster[,sum(partial_leverage),by=cluster_dimension]$V1,c(1,1))
+})

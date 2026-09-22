@@ -1,0 +1,18 @@
+{
+  "tag": "thesis-2026-09-22",
+  "archive_workspace": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace",
+  "files": 4249,
+  "uncompressed_bytes": 3776044876,
+  "parts": [
+    {
+      "name": "complete-inputs.tar.gz.part001",
+      "bytes": 1000000000,
+      "sha256": "29a2d48d393e71780a027ece1b2a2ccfc628123089e6450285ebff986b777095"
+    },
+    {
+      "name": "complete-inputs.tar.gz.part002",
+      "bytes": 322400571,
+      "sha256": "9d87d8542d8de069d61f192be239efeebc4abc51e2a30c574a1a364af49b7ce8"
+    }
+  ]
+}

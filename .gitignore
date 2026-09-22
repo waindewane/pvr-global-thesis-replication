@@ -1,0 +1,14 @@
+workspace/
+downloads/
+release-assets/
+*.log
+prepared.json
+inventory.json
+original_root.txt
+package_paths.json
+removed_internal_notes.json
+installed_packages.csv
+thesis_run.json
+tools/python-packages/
+__pycache__/
+.DS_Store

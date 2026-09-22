@@ -1,0 +1,62 @@
+#!/usr/bin/env Rscript
+args<-commandArgs(trailingOnly=TRUE)
+out<-if(length(args))args[1] else "data-derived/p15_deeper_assessment_20260908_v4"
+base<-"data-derived/p15_analysis_candidate_20260907_v1"
+p<-read.csv(file.path(base,"core_evidence.csv"));s<-read.csv(file.path(base,"selected_reference.csv"))
+e<-read.csv(file.path(base,"tier_eligibility.csv"))
+keys<-function(x)paste(x$iso3,x$analysis_year)
+lookup<-function(id,yr,tier){at<-match(paste(id,yr,tier),paste(e$iso3,e$analysis_year,e$tier));
+  ifelse(e$eligible[at],e$rate_pct[at],NA_real_)}
+checks<-list()
+add<-function(name,result){checks[[length(checks)+1L]]<<-data.frame(check=name,passed=isTRUE(result))}
+now<-s[s$historical_lmic_reporting_scope&is.finite(s$selected_rate_pct),]
+lag<-now;lag$analysis_year<-lag$analysis_year+1L
+d<-merge(now,lag,by=c("iso3","analysis_year"))
+z<-d[d$selected_tier.x!=d$selected_tier.y,]
+delta<-z$selected_rate_pct.x-z$selected_rate_pct.y
+oldnow<-lookup(z$iso3,z$analysis_year,z$selected_tier.y)
+newbefore<-lookup(z$iso3,z$analysis_year-1L,z$selected_tier.x)
+oldwithin<-oldnow-z$selected_rate_pct.y;newwithin<-z$selected_rate_pct.x-newbefore
+opposite<-function(a,b)is.finite(b)&abs(a)>1e-10&abs(b)>1e-10&sign(a)!=sign(b)
+op<-opposite(delta,oldwithin)|opposite(delta,newwithin)
+add("334_source_switches_independently",nrow(z)==334)
+add("104_opposite_directions_independently",sum(op,na.rm=TRUE)==104)
+add("326_bridges_independently",sum(is.finite(oldnow)|is.finite(newbefore))==326)
+add("fixed_priority_precludes_dual_bridge",sum(is.finite(oldnow)&is.finite(newbefore))==0)
+comp<-read.csv(file.path(out,"annual_composition.csv"))
+a<-now[now$analysis_year==2023,];b<-now[now$analysis_year==2024,];common<-intersect(a$iso3,b$iso3)
+add("2024_mean_change_independently",abs((mean(b$selected_rate_pct)-mean(a$selected_rate_pct))-comp$total_mean_change[comp$analysis_year==2024])<1e-12)
+add("2024_common_country_change_independently",abs(mean(b$selected_rate_pct[match(common,b$iso3)]-a$selected_rate_pct[match(common,a$iso3)])-comp$common_country_change[comp$analysis_year==2024])<1e-12)
+ex<-read.csv(file.path(out,"annual_exits.csv"))
+for(yr in 2013:2024)add(paste0("exit_identity_",yr),abs(sum(ex$composition_contribution[ex$analysis_year==yr])-comp$prior_composition[comp$analysis_year==yr])<1e-12)
+mm<-read.csv(file.path(base,"peer_membership.csv"))
+targets<-s[s$historical_lmic_reporting_scope&s$selected_tier=="peer",]
+mm<-mm[paste(mm$target_iso3,mm$analysis_year)%in%keys(targets),]
+groups<-split(mm,paste(mm$analysis_year,mm$target_iso3))
+sig<-vapply(groups,function(x)paste(x$analysis_year[1],paste(sort(x$peer_iso3),collapse=";")),character(1))
+add("62_shared_annual_peer_sets_independently",length(unique(sig))==62)
+add("67_three_member_target_pools",sum(lengths(lapply(groups,function(x)x$peer_iso3))==3)==67)
+stable<-d[d$selected_tier.x=="peer"&d$selected_tier.y=="peer",]
+pc<-do.call(rbind,lapply(seq_len(nrow(stable)),function(i){
+  id<-stable$iso3[i];yr<-stable$analysis_year[i]
+  a<-mm[mm$target_iso3==id&mm$analysis_year==yr-1L,];b<-mm[mm$target_iso3==id&mm$analysis_year==yr,]
+  common<-merge(a[,c("peer_iso3","peer_rate_pct")],b[,c("peer_iso3","peer_rate_pct")],by="peer_iso3")
+  change<-median(b$peer_rate_pct)-median(a$peer_rate_pct)
+  within<-median(common$peer_rate_pct.y)-median(common$peer_rate_pct.x)
+  data.frame(ncommon=nrow(common),opposite=opposite(change,within),
+    matches_selected=abs(change-(stable$selected_rate_pct.x[i]-stable$selected_rate_pct.y[i]))<1e-10)
+}))
+add("667_stable_peer_transitions_independently",nrow(pc)==667)
+add("474_three_common_peer_transitions",sum(pc$ncommon>=3)==474)
+add("82_common_peer_direction_reversals",sum(pc$opposite[pc$ncommon>=3],na.rm=TRUE)==82)
+add("peer_transition_matches_selected",all(pc$matches_selected))
+mod<-read.csv(file.path(out,"model_common_details.csv"));summary<-read.csv(file.path(out,"model_common_summary.csv"))
+for(m in c("moodys","peer","global_median"))add(paste0("model_loss_",m),abs(mean(abs(mod[[m]]-mod$primary))-summary$mae_pp[summary$method==m])<1e-12)
+for(mf in c("input_manifest.csv","script_manifest.csv","output_manifest.csv")){
+  m<-read.csv(file.path(out,mf));add(mf,all(vapply(m$artifact_path,digest::digest,character(1),file=TRUE,algo="sha256")==m$sha256))}
+m<-read.csv(file.path(base,"output_manifest.csv"))
+add("delivered_candidate_unchanged",all(vapply(m$artifact_path,digest::digest,character(1),file=TRUE,algo="sha256")==m$sha256))
+add("six_png_six_pdf",length(list.files(out,pattern="^figure.*png$"))==6&&length(list.files(out,pattern="^figure.*pdf$"))==6)
+receipt<-do.call(rbind,checks);print(receipt)
+stopifnot(all(receipt$passed))
+write.csv(receipt,file.path(out,"independent_verification.csv"),row.names=FALSE)

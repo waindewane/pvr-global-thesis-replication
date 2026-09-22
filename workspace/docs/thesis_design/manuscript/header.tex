@@ -1,0 +1,22 @@
+% Visual format follows literature_review_lr49: A4, 1 inch, 1.5 spacing,
+% XeLaTeX and Latin Modern. Assembly refinements are confined to layout.
+\usepackage{pdflscape}
+\usepackage{eso-pic}
+\usepackage{needspace}
+\usepackage{caption}
+\captionsetup{font=small,labelfont=bf,justification=raggedright,singlelinecheck=false}
+\usepackage{etoolbox}
+\AtBeginEnvironment{longtable}{\small\setstretch{1.05}\setlength{\tabcolsep}{4pt}}
+\setlength{\emergencystretch}{2em}
+\setlength{\LTpre}{0.6em}
+\setlength{\LTpost}{0.5em}
+\setcounter{secnumdepth}{2}
+\setcounter{tocdepth}{2}
+\setcounter{section}{1}
+\widowpenalty=10000
+\clubpenalty=10000
+\displaywidowpenalty=10000
+\AtBeginDocument{\hypersetup{hidelinks}}
+\usepackage{float}
+\setlength{\intextsep}{10pt plus 2pt minus 2pt}
+\setlength{\parskip}{3pt plus 1pt}

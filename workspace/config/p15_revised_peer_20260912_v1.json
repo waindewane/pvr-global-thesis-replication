@@ -1,0 +1,219 @@
+{
+  "version": "P15-REVISED-PEER-20260912-V1",
+  "source_snapshot_id": "SRC-P15-REVISED-PEER-INPUTS-20260912-V1",
+  "authority": "owner_authorized_private_working_method_not_public_release",
+  "years": [
+    2012,
+    2013,
+    2014,
+    2015,
+    2016,
+    2017,
+    2018,
+    2019,
+    2020,
+    2021,
+    2022,
+    2023,
+    2024
+  ],
+  "donor_priority": [
+    "primary",
+    "ids",
+    "secondary",
+    "moodys"
+  ],
+  "minimum_donors": 3,
+  "caliper": 3,
+  "rules": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "distance": "guaranteed_interval",
+  "scenario": "wgi_bounded",
+  "input_policy": "conditional_points",
+  "sources": [
+    {
+      "role": "macro_features",
+      "path": "data-raw/p15_revised_peer_20260912_v1/macro_features.csv",
+      "sha256": "342b08cdcc1f94f0874e63cfc07028f27ea95bac3167c161b3c1af01248b881f",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/scorecard_inputs.csv",
+      "source_snapshot_id": "SRC-P15-PEER-MACRO-FEATURES-20260912"
+    },
+    {
+      "role": "governance_features",
+      "path": "data-raw/p15_revised_peer_20260912_v1/governance_features.csv",
+      "sha256": "3bde9d898dde0885f32109b9a42920ea58dfc40cd28e177dacc0eb6ac7cd52f8",
+      "origin_path": "experiments/p15_peer_rating_expansion_20260912/model_feature_panel.csv",
+      "source_snapshot_id": "SRC-P15-PEER-GOVERNANCE-FEATURES-20260912"
+    },
+    {
+      "role": "historical_eligibility",
+      "path": "data-raw/p15_revised_peer_20260912_v1/historical_eligibility.csv",
+      "sha256": "ca5522e1004f60478a6652e4b032214871106f370f5684233854231f65a8aeb8",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/constructed_v1/historical_eligibility.csv",
+      "source_snapshot_id": "SRC-P15-PEER-HISTORICAL-ELIGIBILITY-20260912"
+    },
+    {
+      "role": "economic_resiliency",
+      "path": "data-raw/p15_revised_peer_20260912_v1/economic_resiliency.csv",
+      "sha256": "fffcc3d69ce5ad1cd5822e57fadef29d7d0791699bb9bf1b0a998b3132d1576b",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/constructed_v1/economic_resiliency.csv",
+      "source_snapshot_id": "SRC-P15-PEER-ECONOMIC-RESILIENCY-20260912"
+    },
+    {
+      "role": "government_financial_strength",
+      "path": "data-raw/p15_revised_peer_20260912_v1/government_financial_strength.csv",
+      "sha256": "5e68113e21af89111ee1306e2ff9ebcf7e2ad96c0eae058bd365564fa3d474c3",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/constructed_v1/government_financial_strength.csv",
+      "source_snapshot_id": "SRC-P15-PEER-GOVERNMENT-FINANCIAL-STRENGTH-20260912"
+    },
+    {
+      "role": "rating_midpoint",
+      "path": "data-raw/p15_revised_peer_20260912_v1/rating_midpoint.csv",
+      "sha256": "043208a2dfc20284bcdc96b66c79f6d2337a1bcd81900860d5b33529f842b39b",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/constructed_v1/rating_midpoint.csv",
+      "source_snapshot_id": "SRC-P15-PEER-RATING-MIDPOINT-20260912"
+    },
+    {
+      "role": "prior_scorecard_input_manifest",
+      "path": "data-raw/p15_revised_peer_20260912_v1/prior_scorecard_input_manifest.csv",
+      "sha256": "f15cae832721a004bd3b0fb4015b9e4e970ff921fcfd01d95e4c4edbb3cdb774",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/constructed_v1/source_input_manifest.csv",
+      "source_snapshot_id": "SRC-P15-PEER-PROVENANCE-20260912"
+    },
+    {
+      "role": "prior_macro_source_manifest",
+      "path": "data-raw/p15_revised_peer_20260912_v1/prior_macro_source_manifest.csv",
+      "sha256": "be9da6f9a8fbccce0f03d3dd8d73bfbf9059f04fc2ff2a26ffdeb9defd9433cd",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/macro/macro_build_inputs_manifest.csv",
+      "source_snapshot_id": "SRC-P15-PEER-PROVENANCE-20260912"
+    },
+    {
+      "role": "prior_governance_source_manifest",
+      "path": "data-raw/p15_revised_peer_20260912_v1/prior_governance_source_manifest.csv",
+      "sha256": "a04175da6449b0f04dc77eece9a9ab9014869887f93710b81c10585466fd432b",
+      "origin_path": "experiments/p15_peer_rating_expansion_20260912/source_snapshot_manifest.csv",
+      "source_snapshot_id": "SRC-P15-PEER-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_1",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/1_build_macro_inputs.R",
+      "sha256": "58890d02470a11569ed1c502d5def5aaa806b01f72726594daeb787e6e98c7dd",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/build_macro_inputs.R",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_2",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/2_build_supplemental_inputs.R",
+      "sha256": "8cdd89f6de6a510f75f31085fd192655d878aeb85a47d570964a02ebe4a5c596",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/build_supplemental_inputs.R",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_3",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/3_prepare_inputs.py",
+      "sha256": "fbe1b25157c7a874a27689fa3144e9b215de9df0f3a87f16f82dd766248a4d1b",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/constructed_v1/prepare_inputs.py",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_4",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/4_fetch_and_extract.py",
+      "sha256": "64fe5373a7c5f6c44f068c22bec61825aaa9074bc97f1843ba7b359da8175515",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/constructed_v1/fetch_and_extract.py",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_5",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/5_build_features.R",
+      "sha256": "4ec9596cb7c4af926b01f217134ece0a16de624d3b1db251d49ac5c6e99a2aef",
+      "origin_path": "experiments/p15_peer_rating_expansion_20260912/build_features.R",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_6",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/6_code_manifest.csv",
+      "sha256": "38f5a65713782ee1c34a2ab05825da643f772525ff91b906444ee3e80b947c39",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/code_manifest.csv",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_7",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/7_code_manifest.csv",
+      "sha256": "e51dd11dd19e098b3709b797514855c29b134d034aedb574bf819387d5e471c8",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/constructed_v1/code_manifest.csv",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_8",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/8_code_manifest.csv",
+      "sha256": "0867bff99f1272fca33c5428a627834aa16ee7fb770f6058b471d94d127e104d",
+      "origin_path": "experiments/p15_peer_rating_expansion_20260912/code_manifest.csv",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_9",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/9_weo_download_manifest.json",
+      "sha256": "66945253765262c306102514eb08e7faa97e7ab4f1607edd63fbd1e8808e4fef",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/macro/weo_download_manifest.json",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_10",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/10_gfs_interest_manifest.json",
+      "sha256": "90c8e02287ba24f473139abf41a897c630950d1552a2a543e342929ef06fd45c",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/macro/gfs_interest_manifest.json",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_11",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/11_macro_source_manifest.json",
+      "sha256": "eea3c212a35f896c9300f7eed2f04fba960568e913f6d58508c81d5e0e10e289",
+      "origin_path": "experiments/p15_peer_rating_expansion_20260912/macro_source_manifest.json",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    },
+    {
+      "role": "source_preparation_archive_12",
+      "path": "data-raw/p15_revised_peer_20260912_v1/source_preparation_archive/12_input_manifest.csv",
+      "sha256": "4a0d3748525b7173b3bb842d6798492d3022f56d4e6c1d51556e7b9901c0447f",
+      "origin_path": "experiments/p15_wb_scorecard_20260912/supplemental/input_manifest.csv",
+      "source_snapshot_id": "SRC-P15-PEER-PREPARATION-PROVENANCE-20260912"
+    }
+  ],
+  "snapshot_manifest": "data-raw/p15_revised_peer_20260912_v1/snapshot_manifest.csv",
+  "secondary_ordinary_holds": [
+    {
+      "iso3": "LBN",
+      "years": [
+        2020,
+        2021,
+        2022,
+        2023
+      ]
+    },
+    {
+      "iso3": "BLR",
+      "years": [
+        2022,
+        2023,
+        2024
+      ]
+    },
+    {
+      "iso3": "RUS",
+      "years": [
+        2022
+      ]
+    }
+  ],
+  "notes": [
+    "Frozen prepared macro/GCI and WGI input snapshots, not saved shadow ratings or peer predictions.",
+    "Conditional 2018 quantitative scorecard adaptation; uncertain gross interest, missing GCI, default and currency adjustments are bounded; event risk fixed at M.",
+    "Actual Moody ratings precede shadow intervals for matching. Shadow scores never generate own-country or donor implied rates.",
+    "Future macro-source updates require a new source snapshot and updated config hashes; changes to baseline rates and eligibility are recomputed automatically."
+  ]
+}

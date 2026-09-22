@@ -1,0 +1,61 @@
+{
+  "version": "P15-MASTER-20260912-REVISED-PEER-V1",
+  "cache_root": "data-derived/p15_master",
+  "raw_snapshot_manifest": "data-derived/p15_full_replay_20260909_165602/input_manifest.csv",
+  "reference_candidate": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/raw_1d030237b16ec787e514/candidate",
+  "reference_research": "data-derived/p15_region_correction_research_20260909_v2",
+  "reference_dac": "data-derived/p15_official_dac_mapping_20260908_v1",
+  "reference_peer_geography": "data-derived/p15_peer_geography_validation_20260909_v1",
+  "reference_stages": {
+    "assessment": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/assessment_6722ad92f4d92ebd5f95",
+    "deeper": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/deeper_04ee9da3700cc1801a6b",
+    "regional": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/regional_8dc964725acc6922e293",
+    "policy": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/policy_7a7a2409feacfcd2b4b0",
+    "dac": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/dac_9687c31853aac53e6fcb",
+    "official_policy": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/official_policy_d60fb53d41a2f3075c07",
+    "pv_first": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/pv_first_91ec9bbd1bc66da6c3ae",
+    "bullet": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/bullet_cd6369982c2d03421833",
+    "pv_interpretation": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/pv_interpretation_91d1a7c7ecb096996241",
+    "pv_followup": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/pv_followup_ef6622c5c12fae99258c",
+    "pv_three_block": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/pv_three_block_1d41927d79e1eda0bea0",
+    "peer_geography_validation": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/peer_geography_validation_e75dbed1ab0d866f64fb",
+    "benchmark_inference": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/benchmark_inference_2da495ad0fec9fc4571d",
+    "repayment_influence": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/repayment_influence_9f07daacdd209a3caca1",
+    "loan_comparisons": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/loan_comparisons_7eb573bfe8c0a75d1f24",
+    "loan_period_inference": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/loan_period_inference_912defe3c9e7d602c0d3",
+    "regional_followup": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/regional_followup_8ae4ac0d9609f0fc86ae",
+    "statistical_review": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/statistical_review_9a2576b6459a42947ac1",
+    "crs_application": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/crs_application_e2358f20d5c409af4f67",
+    "source_overlap_currency": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/source_overlap_currency_620d87227a13c2d61ad6",
+    "crs_companions": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/crs_companions_fefddbb1ce1555ee69ce",
+    "crs_modern_summary": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/crs_modern_summary_011676c841498e2b8624",
+    "gbohoui_context": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/gbohoui_context_ebd1084d6d0b856fede1",
+    "panel_disbursement": "/Users/waindewane/Claude and Codex/Miscellaneous/pvr-global/exports/thesis-replication-20260922/workspace/data-derived/p15_master/panel_disbursement_06ea0e3c2227bf50faa4",
+    "rating_nested": "data-derived/p15_rating_nested_check_20260912_v1",
+    "peer_description": "data-derived/p15_peer_group_description_20260912_v1",
+    "rating_gap_influence": "data-derived/p15_pv_annotation_influence_20260909_v1"
+  },
+  "analysis_registry": "config/p15_analysis_registry.csv",
+  "version_registry": "docs/governance/version_registry.csv",
+  "analysis_snapshot_manifest": "config/p15_analysis_source_snapshot_20260911_followup_v1.csv",
+  "notes_registry": "config/p15_notes_registry.csv",
+  "notes_review_receipt": "config/p15_notes_review_receipt.csv",
+  "revised_peer_config": "config/p15_revised_peer_20260912_v1.json",
+  "extra_stage_code": {
+    "assessment": [
+      "R/p15_revised_peer_validation.R",
+      "R/p15_revised_peer_matching.R",
+      "scripts/p15/loan_extension/benchmark_matching.R"
+    ],
+    "deeper": [
+      "R/p15_revised_peer_validation.R",
+      "R/p15_revised_peer_matching.R",
+      "scripts/p15/loan_extension/benchmark_matching.R"
+    ],
+    "peer_geography_validation": [
+      "R/p15_revised_peer_validation.R",
+      "R/p15_revised_peer_matching.R",
+      "scripts/p15/loan_extension/benchmark_matching.R"
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+#!/usr/bin/env Rscript
+source("scripts/p15/activate_p15_environment.R")
+suppressPackageStartupMessages({library(data.table);library(jsonlite);library(digest)})
+source("scripts/p15/annotation_followup_20260911/crs_cashflows.R")
+args<-commandArgs(TRUE);base<-if(length(args))args[1]else"data-derived/p15_crs_application_20260911_v4"
+out<-if(length(args)>1L)args[2]else"data-derived/p15_crs_application_verification_20260911_v1"
+stopifnot(!dir.exists(out));dir.create(out,recursive=TRUE)
+x<-fread(file.path(base,"loan_valuations.csv"),na.strings="");p<-fread(file.path(base,"paired_comparisons.csv"));f<-fread(file.path(base,"cash_flows.csv"))
+inventory<-fread(file.path(base,"reporting_inventory.csv"));audit<-fread(file.path(base,"row_eligibility.csv"))
+check<-list();add<-function(n,b){check[[length(check)+1L]]<<-data.table(check=n,passed=isTRUE(b))}
+zero<-crs_cashflows("2024-01-01","2025-01-01","2026-01-01",0,1,1)
+add("zero_interest_undiscounted_GE_zero",abs(crs_ge(zero,0))<1e-10)
+add("two_payment_zero_interest_EPP",identical(zero$principal,c(50,50)))
+one<-crs_cashflows("2025-01-01","2026-01-01","2026-01-01",4,1,1)
+expected<-100-(100+100*0.04*365/365.25)/(1.07)^(365/365.25)
+add("single_payment_hand_calculation",abs(crs_ge(one,7)-expected)<1e-10)
+ann<-crs_cashflows("2024-01-01","2025-01-01","2028-01-01",5,1,2)
+add("annuity_payments_constant",diff(range(ann$payment))<1e-9)
+grace<-crs_cashflows("2024-01-01","2026-01-01","2028-01-01",4,2,1)
+add("interest_paid_during_grace",any(grace$principal==0&grace$interest>0))
+snap<-crs_cashflows("2024-01-01","2025-01-01","2026-01-02",0,1,1)
+add("one_day_date_offset_no_spurious_instalment",nrow(snap)==2L)
+stub<-crs_cashflows("2024-01-01","2025-01-01","2026-04-01",0,1,1)
+add("genuine_stub_retained",nrow(stub)==3L&&tail(stub$payment_date,1)=="2026-04-01")
+add("all_13_reporting_years_scanned",setequal(inventory$report_year,2012:2024))
+add("all_debt_rows_preserved_in_audit",sum(inventory$debt_rows)==nrow(audit))
+add("eligible_reporting_rows_reconcile_to_activity_records",sum(audit$exclusion_reason=="eligible_terms")==sum(x$source_record_count))
+add("only_new_positive_government_loan_commitments",all(x$InitialReport==1&x$Finance_T==421&x$amount_usd>0&x$ChannelCode%in%c(12000,12001)&x$commitment_year==x$report_year))
+add("numeric_interest_code_thousandths_verified",all(abs(x$interest_rate_pct-as.numeric(x$Interest1)/1000)<1e-10))
+add("positive_second_numeric_interest_not_ignored",all(is.na(as.numeric(x$Interest2))|as.numeric(x$Interest2)<=0))
+add("World_Bank_zero_total_charges_not_assumed",!any(grepl("International Bank for Reconstruction|International Development Association",x$DonorName)&x$interest_rate_pct==0))
+add("World_Bank_loan_splits_consolidated",!anyDuplicated(x[!is.na(wb_loan_id),.(report_year,wb_loan_id,DonorCode,AgencyCode)]))
+add("complete_and_unique_case_reference_keys",!anyDuplicated(p[,.(loan_id,reference,benchmark_view)])&&all(is.finite(p$delta_ge_pp)))
+u<-merge(f,x[,.(loan_id,ge_fixed5_pct,ge_market_pct,ge_standardized_pct,benchmark_selected_rate_pct,standardized_reference_rate_pct)],by="loan_id",all.x=TRUE)
+pv<-u[,.(independent5=100-sum(payment*exp(-log1p(0.05)*time_years)),saved5=ge_fixed5_pct[1],
+ independent_market=100-sum(payment*exp(-log1p(benchmark_selected_rate_pct[1]/100)*time_years)),saved_market=ge_market_pct[1],
+ principal_total=sum(principal)),by=loan_id]
+add("independent_log_discount_5pct_replay",max(abs(pv$independent5-pv$saved5))<1e-8)
+add("independent_log_discount_market_replay",max(abs(pv$independent_market-pv$saved_market),na.rm=TRUE)<1e-8)
+add("all_activity_principal_totals_100",max(abs(pv$principal_total-100))<1e-7)
+add("historical10_only_before2018",all(p[reference=="historical_10pct_convention",commitment_year]<2018))
+add("all_standardized_rates_use_annual_category_map",all(p[reference=="standardized_DAC_category_rule",reference_discount_rate_pct==group_rate_pct]))
+add("nonpeer_has_no_peer_rates",all(p[benchmark_view=="non_peer",benchmark_selected_tier]!="peer"))
+add("primary_IDS_view_restricted",all(p[benchmark_view=="primary_ids",benchmark_selected_tier]%in%c("primary","ids")))
+for(nm in c("input_manifest","code_manifest","output_manifest")) {
+ z<-fread(file.path(base,paste0(nm,".csv")));actual<-vapply(z$path,function(q)digest(file=q,algo="sha256"),character(1))
+ add(paste0(nm,"_hashes_match"),all(z$sha256==actual))
+}
+res<-rbindlist(check);fwrite(res,file.path(out,"checks.csv"));fwrite(pv,file.path(out,"independent_pv_replay.csv"))
+writeLines(capture.output(sessionInfo()),file.path(out,"environment.txt"));print(res);stopifnot(all(res$passed))

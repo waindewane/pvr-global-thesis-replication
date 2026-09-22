@@ -1,0 +1,65 @@
+source("R/p15_current_inputs.R")
+#!/usr/bin/env Rscript
+source("scripts/p15/activate_p15_environment.R")
+suppressPackageStartupMessages({library(data.table);library(jsonlite);library(digest);library(countrycode)})
+args<-commandArgs(TRUE)
+out<-if(length(args))args[1]else file.path("data-derived",paste0("p15_crs_companions_",format(Sys.time(),"%Y%m%d_%H%M%S")))
+base<-Sys.getenv("P15_CRS_BASE", p15_current_input("crs_application"))
+loan_base<-Sys.getenv("P15_LOAN_BASE", p15_current_input("loan_comparisons"))
+stopifnot(!dir.exists(out));dir.create(out,recursive=TRUE)
+xp<-file.path(base,"loan_valuations.csv");pp<-file.path(base,"paired_comparisons.csv");ap<-file.path(loan_base,"loan_valuations.csv")
+x<-fread(xp,na.strings="");p<-fread(pp,na.strings="");a<-fread(ap,na.strings="",colClasses=c(source_loan_id="character",wb_id="character"))
+x[,continent:=countrycode(iso3,"iso3c","continent",warn=FALSE)]
+x[iso3=="XKX",continent:="Europe"]
+q<-x[matched==TRUE&non_peer==TRUE]
+q[,existing_ADD_main_country:=iso3%in%a[dataset=="add"&matched&main_cohort&non_peer,unique(iso3)]]
+geo<-q[,.(financing_records=.N,countries=uniqueN(iso3),providers=uniqueN(DonorCode),
+ mean_standardized_delta_ge_pp=mean(delta_standardized_ge_pp),mean_fixed5_delta_ge_pp=mean(delta_fixed5_ge_pp)),by=continent]
+increment<-q[,.(financing_records=.N,countries=uniqueN(iso3)),by=existing_ADD_main_country]
+crs_wb<-x[!is.na(wb_loan_id),.(wb_id=wb_loan_id,crs_id=loan_id,iso3,crs_year=commitment_year,crs_matched=matched,
+ crs_nonpeer=non_peer,crs_first=first_date,crs_final=final_date,crs_interest=interest_rate_pct)]
+others<-a[dataset=="mpg"&creditor%in%c("IDA","IBRD"),.(dataset,other_id=loan_id,wb_id=source_loan_id,iso3,other_year=commitment_year,
+ other_matched=matched,other_main=main_cohort,other_nonpeer=non_peer,other_interest=interest_rate_pct)]
+others<-rbindlist(list(others,a[dataset=="add"&!is.na(wb_id),.(dataset,other_id=loan_id,wb_id,iso3,other_year=commitment_year,
+ other_matched=matched,other_main=main_cohort,other_nonpeer=non_peer,other_interest=interest_rate_pct)]))
+hard<-merge(crs_wb,others,by=c("wb_id","iso3"),allow.cartesian=TRUE)
+hard[,`:=`(same_commitment_year=crs_year==other_year,both_main_nonpeer=crs_matched&crs_nonpeer&other_matched&other_main&other_nonpeer,
+ interest_difference_pp=crs_interest-other_interest)]
+hard_summary<-hard[,.(shared_WB_ids=uniqueN(wb_id),crs_records=uniqueN(crs_id),other_records=uniqueN(other_id)),by=.(dataset,both_main_nonpeer,same_commitment_year)]
+source_coverage<-x[,.(financing_records=.N,matched=sum(matched),nonpeer=sum(matched&non_peer),
+ source_records=sum(source_record_count),source_activities=sum(source_activity_count)),by=.(commitment_year,DonorName)]
+irregular<-fread(file.path(base,"schedule_checks.csv"))[,.(loan_id,irregular_final_interval)]
+p<-merge(p,irregular,by="loan_id",all.x=TRUE)
+metrics<-function(z)z[,.(financing_records=.N,countries=uniqueN(iso3),providers=uniqueN(DonorCode),
+ mean_delta_ge_pp=mean(delta_ge_pp),amount_weighted_delta_ge_pp=weighted.mean(delta_ge_pp,amount_usd))]
+sens<-rbindlist(lapply(c("all","regular_final_interval","central_government_explicit","non_World_Bank"),function(s){
+ z<-p[benchmark_view=="non_peer"&(s=="all"|(s=="regular_final_interval"&!irregular_final_interval)|
+ (s=="central_government_explicit"&borrower_scope=="central_government_explicit")|(s=="non_World_Bank"&is.na(wb_loan_id)))]
+ w<-z[,metrics(.SD),by=.(reference,period)];w[,sensitivity:=s];w}))
+# Keep the same set of reporting providers across all modern years. This does
+# not hold borrowers, loan terms or benchmark methods constant.
+stable<-q[commitment_year>=2018,.(years=uniqueN(commitment_year)),by=DonorName][years==7,DonorName]
+provider_fixed<-p[benchmark_view=="non_peer"&reference=="standardized_DAC_category_rule"&commitment_year>=2018&DonorName%in%stable,
+ metrics(.SD),by=commitment_year]
+provider_fixed[,included_providers:=paste(sort(stable),collapse=";")]
+reporting_ratios<-x[reported_disbursement_usd>0&is.finite(reported_grant_equivalent_usd),
+ .(loan_id,commitment_year,DonorName,reported_disbursement_usd,reported_grant_equivalent_usd,
+ reported_flow_ratio_pct=100*reported_grant_equivalent_usd/reported_disbursement_usd,ge_standardized_pct,
+ denominator="report_year_disbursement_not_full_commitment",interpretation="reported_flow_ratio_companion_not_verified_exact_GRANT_ELEMENT_replication")]
+tables<-list(geographic_coverage=geo,coverage_relative_to_existing_ADD=increment,hard_WB_identity_links=hard,
+ hard_WB_overlap_summary=hard_summary,annual_provider_coverage=source_coverage,scope_schedule_sensitivities=sens,
+ constant_provider_modern_annual=provider_fixed,reported_flow_ratio_companion=reporting_ratios)
+for(nm in names(tables))fwrite(tables[[nm]],file.path(out,paste0(nm,".csv")))
+checks<-data.table(check=c("geography_total_reconciles","hard_WB_ID_and_country_only","same_year_not_assumed_for_ID_link","stable_providers_each_all7years"),
+ passed=c(sum(geo$financing_records)==nrow(q),all(hard$wb_id%in%x$wb_loan_id),
+ identical(hard$same_commitment_year,hard$crs_year==hard$other_year),all(q[DonorName%in%stable&commitment_year>=2018,uniqueN(commitment_year),by=DonorName]$V1==7)))
+fwrite(checks,file.path(out,"checks.csv"));stopifnot(all(checks$passed))
+manifest<-function(ps)data.table(path=ps,sha256=vapply(ps,function(f)digest(file=f,algo="sha256"),character(1)),bytes=file.info(ps)$size)
+fwrite(manifest(c(xp,pp,ap,file.path(base,"schedule_checks.csv"),"renv.lock")),file.path(out,"input_manifest.csv"))
+fwrite(manifest("scripts/p15/annotation_followup_20260911/build_crs_companions.R"),file.path(out,"code_manifest.csv"))
+writeLines(capture.output(sessionInfo()),file.path(out,"environment.txt"))
+write_json(list(build_id=basename(out),schema_id="SCHEMA-P15-CRS-COMPANIONS-V1",estimator_id="EST-DESCRIPTIVE-COMPARISON-V1",
+ admissibility_id="ADM-EXISTING-CRS-MATCHED-VIEWS-V1",selection_id="SEL-EXISTING-BENCHMARK-UNCHANGED",
+ source_package_ids=basename(base),lifecycle_status="diagnostic",release_state="private_research"),file.path(out,"version_bundle.json"),pretty=TRUE,auto_unbox=TRUE)
+fwrite(manifest(list.files(out,full.names=TRUE)),file.path(out,"output_manifest.csv"))
+print(geo);print(increment);print(hard_summary)

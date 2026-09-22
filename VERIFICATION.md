@@ -4,7 +4,7 @@ The package was tested in an isolated export of the research project on macOS wi
 
 | Check | Result |
 |---|---|
-| Private repository visibility | Confirmed with GitHub |
+| Repository visibility | Initially verified as private; made public on the owner’s explicit request on 22 September 2026 |
 | Release download and file checksums | All archive parts and all 4,250 snapshot files verified |
 | Registered input and code dependencies | All 1,421 present in the separately downloaded workspace; raw snapshot hashes verified |
 | Raw construction replay | All 20 construction stages and subsequent source-review steps completed; all six acceptance gates passed |

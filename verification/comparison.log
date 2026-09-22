@@ -1,0 +1,32 @@
+                        stage tables passed
+                       <char>  <int>  <int>
+ 1:                benchmarks     23     23
+ 2:                assessment     46     46
+ 3:                    deeper     45     45
+ 4:                  regional     14     14
+ 5:                    policy     20     20
+ 6:                       dac      6      6
+ 7:           official_policy     19     19
+ 8:                  pv_first     14     14
+ 9:                    bullet     11     11
+10:         pv_interpretation     32     32
+11:               pv_followup     21     21
+12:            pv_three_block      7      7
+13: peer_geography_validation     17     17
+14:       benchmark_inference     14     14
+15:       repayment_influence     16     16
+16:          loan_comparisons     37     37
+17:     loan_period_inference     12     12
+18:         regional_followup     10     10
+19:        statistical_review     35     35
+20:           crs_application     15     15
+21:   source_overlap_currency      8      8
+22:            crs_companions      9      9
+23:        crs_modern_summary     11     11
+24:           gbohoui_context     14     14
+25:        panel_disbursement     16     16
+26:             rating_nested     12     12
+27:          peer_description      9      9
+28:      rating_gap_influence      4      4
+                        stage tables passed
+All 497 table comparisons passed.

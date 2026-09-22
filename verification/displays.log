@@ -1,0 +1,334 @@
+DISPLAY: dataset_construction/peer_plan_refresh_20260920/build_display_tables.R 
+     period country_years countries actual_rating_recorded
+1 2012–2024          1756       142                    903
+  bounded_score_without_recorded_rating peer_computable peer_selected
+1                                   712            1706           731
+  selected_actual_target_rating selected_estimated_target_rating
+1                             2                              582
+  selected_income_region_only
+1                         147
+     period selected_borrower_years primary_memberships ids_memberships
+1 2012–2024                     731                 733            1057
+  secondary_memberships rating_implied_memberships total_memberships
+1                   258                       2867              4915
+  groups_with_rating_implied groups_only_rating_implied
+1                        697                         71
+  rule old_selected revised_selected
+1    1            0              207
+2    2            0              235
+3    3            0               51
+4    4            1               91
+5    5           72              147
+6    6          339                0
+7    7          146                0
+8    8          220                0
+DISPLAY: dataset_construction/illustration_refresh_20260920/verify_example.R 
+Peru construction verified: 5.70775 percent; primary selected; all five alternatives eligible.
+DISPLAY: benchmark_evaluation/evaluation_design_20260920/verify_metrics.R 
+Verified 20 scenario/method summaries and their country-year keys.
+DISPLAY: benchmark_evaluation/coverage_20260920/verify_and_prepare.R 
+      source eligible_country_years selected_country_years cumulative_selected
+      <char>                  <int>                  <int>               <int>
+1:   primary                    215                    215                 215
+2:       ids                    418                    229                 444
+3: secondary                    251                     72                 516
+4:    moodys                    893                    454                 970
+5:      peer                   1698                    731                1701
+   cumulative_percent
+                <num>
+1:           12.24374
+2:           25.28474
+3:           29.38497
+4:           55.23918
+5:           96.86788
+                                               group country_years
+                                              <char>         <int>
+1:                                        Low income           389
+2:                               Upper middle income           717
+3:                               Lower middle income           650
+4: Middle East, North Africa, Afghanistan & Pakistan           182
+5:                                Sub-Saharan Africa           608
+6:                             Europe & Central Asia           264
+7:                         Latin America & Caribbean           319
+8:                               East Asia & Pacific           305
+9:                                        South Asia            78
+   primary_ids_secondary nonpeer peer_selected selected               dimension
+                   <int>   <int>         <int>    <int>                  <char>
+1:                    22      77           276      353 historical_income_level
+2:                   286     524           184      708 historical_income_level
+3:                   208     369           271      640 historical_income_level
+4:                    65      81            75      156                  region
+5:                    97     254           347      601                  region
+6:                   102     211            51      262                  region
+7:                   158     255            61      316                  region
+8:                    70     133           159      292                  region
+9:                    24      36            38       74                  region
+   primary_ids_secondary_percent nonpeer_percent peer_selected_percent
+                           <num>           <num>                 <num>
+1:                      5.655527        19.79434              70.95116
+2:                     39.888424        73.08229              25.66248
+3:                     32.000000        56.76923              41.69231
+4:                     35.714286        44.50549              41.20879
+5:                     15.953947        41.77632              57.07237
+6:                     38.636364        79.92424              19.31818
+7:                     49.529781        79.93730              19.12226
+8:                     22.950820        43.60656              52.13115
+9:                     30.769231        46.15385              48.71795
+   selected_percent
+              <num>
+1:         90.74550
+2:         98.74477
+3:         98.46154
+4:         85.71429
+5:         98.84868
+6:         99.24242
+7:         99.05956
+8:         95.73770
+9:         94.87179
+    analysis_year country_years primary   ids secondary rating_implied  peer
+            <int>         <int>   <int> <int>     <int>          <int> <int>
+ 1:          2012           138       7    21         0             26    76
+ 2:          2013           138       6    26         0             28    73
+ 3:          2014           134      14    19         1             31    65
+ 4:          2015           138      11    27         4             30    63
+ 5:          2016           139      12    21         4             36    63
+ 6:          2017           136      25    16         1             34    58
+ 7:          2018           137      20    19         5             35    56
+ 8:          2019           134      21    21         5             33    52
+ 9:          2020           136      24    13         8             40    48
+10:          2021           135      22    19         9             36    46
+11:          2022           133      14     8        15             48    44
+12:          2023           130      15    11        12             45    43
+13:          2024           128      24     8         8             32    44
+    no_rate
+      <int>
+ 1:       8
+ 2:       5
+ 3:       4
+ 4:       3
+ 5:       3
+ 6:       2
+ 7:       2
+ 8:       2
+ 9:       3
+10:       3
+11:       4
+12:       4
+13:      12
+Verified overall, annual, income and regional coverage against current outputs.
+DISPLAY: benchmark_evaluation/coverage_prose_20260920/build_coverage_figure.R 
+DISPLAY: benchmark_evaluation/accuracy_20260920/prepare_evidence.R 
+        tier records countries focal_mae_pp comparator_mae_pp reduction_percent
+      <char>   <int>     <int>        <num>             <num>             <num>
+1:       ids     127        37    0.5729816          1.653972          65.35723
+2: secondary     117        32    1.1098728          1.661509          33.20089
+3:    moodys     126        38    1.1084186          1.686003          34.25762
+4:      peer     136        41    1.1605382          1.661144          30.13622
+   method first_year last_year years country_years mean_spearman
+   <char>      <int>     <int> <int>         <int>         <num>
+1: moodys       2014      2024    11           189     0.7762260
+2:   peer       2014      2024    11           189     0.5978322
+DISPLAY: benchmark_evaluation/source_comparability_20260920/prepare_evidence.R 
+                 pair     n countries mean_gap_pp    mae_pp   rmse_pp  within_1
+               <char> <int>     <int>       <num>     <num>     <num>     <num>
+1:       primary__ids   189        41  -0.1260610 0.5760275 0.9492384 0.8095238
+2: primary__secondary   150        36  -0.3667192 1.0216520 1.8077053 0.6400000
+   close_dates close_maturity sample     n       bias       mae
+        <lgcl>         <lgcl> <char> <int>      <num>     <num>
+1:       FALSE          FALSE    all    57 -0.6835140 1.0656723
+2:        TRUE          FALSE    all    34 -0.1794225 1.3425862
+3:       FALSE           TRUE    all    42 -0.1476615 0.9138919
+4:        TRUE           TRUE    all    17 -0.2203202 0.4984171
+DISPLAY: benchmark_evaluation/source_comparability_prose_20260920/prepare_median_comparison.R 
+       focal comparator country_years countries first_mae second_mae
+      <char>     <char>         <int>     <int>     <num>      <num>
+1: secondary     moodys           107        29  1.114930   1.092995
+2:    moodys       peer           126        38  1.108419   1.135842
+3: secondary       peer           117        32  1.109873   1.130772
+   first_median_absolute_error second_median_absolute_error
+                         <num>                        <num>
+1:                   0.7690118                    0.9373037
+2:                   0.9357063                    0.8748364
+3:                   0.7792439                    0.8647385
+DISPLAY: benchmark_evaluation/applicability_20260920/prepare_evidence.R 
+      period  rows countries rows_with_prior_history rows_without_prior_history
+      <char> <int>     <int>                   <int>                      <int>
+1: 2012_2024   454        75                      38                        416
+2: 2018_2024   269        58                      28                        241
+            information     n countries      mae low_income
+                 <char> <int>     <int>    <num>      <int>
+1:     available_rating   214        46 1.117389          5
+2: target_rating_hidden   209        46 1.334829          5
+       n countries available_mae hidden_mae
+   <int>     <int>         <num>      <num>
+1:   209        46      1.117158   1.334829
+   selected_country_years year_specific_groups
+                    <int>                <int>
+1:                    731                  416
+   selected_estimates_with_rating_implied_members
+                                            <int>
+1:                                            697
+DISPLAY: benchmark_evaluation/temporal_use_20260921/prepare_evidence.R 
+                  focal n_transitions countries focal_endpoint_mae_pp
+                 <char>         <int>     <int>                 <num>
+1:    fallback_with_ids            75        23             0.6878357
+2: fallback_without_ids            75        23             1.2198612
+3:                  ids            70        22             0.6568884
+4:               moodys            69        22             1.1011443
+5:                 peer            75        23             1.1574775
+6:            secondary            66        21             1.1848357
+   dac_endpoint_mae_pp focal_change_mae_pp dac_change_mae_pp source_switch_n
+                 <num>               <num>             <num>           <int>
+1:            1.743378           0.6696627         0.9883432               1
+2:            1.743378           1.4272061         0.9883432               2
+3:            1.773710           0.6089964         0.9449578               0
+4:            1.769022           1.1062094         0.9725737               0
+5:            1.743378           1.1420925         0.9883432               0
+6:            1.732607           1.4629399         0.9574598               0
+   both_closer_change_worse
+                      <int>
+1:                       15
+2:                       16
+3:                       15
+4:                        9
+5:                       19
+6:                       16
+        tier countries_in_scope available_all_seven selected_all_seven
+      <char>              <int>               <int>              <int>
+1:   primary                127                   7                  7
+2:       ids                127                  12                  2
+3: secondary                127                  18                  0
+4:    moodys                127                  58                 14
+DISPLAY: borrowing_conditions/content_5_1_5_2_20260921/verify_content.R 
+    analysis_year countries mean_rate median_rate      q25       q75
+            <int>     <int>     <num>       <num>    <num>     <num>
+ 1:          2012        54  5.309071    5.298800 4.095440  6.349710
+ 2:          2013        60  5.489456    5.517510 3.937520  6.540575
+ 3:          2014        65  6.122785    6.030400 5.116000  7.450000
+ 4:          2015        72  6.558486    6.599000 4.634825  8.120896
+ 5:          2016        73  6.434857    5.800000 4.521214  7.991740
+ 6:          2017        76  6.533397    6.774789 4.715927  7.765517
+ 7:          2018        79  7.365514    7.250000 5.589346  9.061705
+ 8:          2019        80  6.323505    6.591865 4.796800  7.499633
+ 9:          2020        84  5.264378    5.585074 3.703525  6.470025
+10:          2021        85  5.936890    5.880172 3.875000  7.576598
+11:          2022        82  9.437894    8.631501 6.727486 11.529432
+12:          2023        81  9.474104    8.929591 6.858000 11.106350
+13:          2024        71  8.728166    8.622203 6.671665 10.601075
+      view analysis_year countries mean_change median_change rising
+    <char>         <int>     <int>       <num>         <num>  <int>
+1: no_peer          2022        81   3.4388115     3.8551922     77
+2: no_peer          2024        70  -0.1716531    -0.4063319     21
+   source_switches
+             <int>
+1:              32
+2:              23
+      view analysis_year countries mean_change
+    <char>         <int>     <int>       <num>
+1: no_peer          2022        49    3.782354
+       view                     region countries mean_difference_pp
+     <char>                     <char>     <int>              <num>
+ 1:  moodys        East Asia & Pacific        10           3.711036
+ 2:  moodys      Europe & Central Asia        14           4.309060
+ 3:  moodys  Latin America & Caribbean        13           4.419250
+ 4:  moodys Middle East & North Africa         4           4.954648
+ 5:  moodys                 South Asia         3           5.016806
+ 6:  moodys         Sub-Saharan Africa        22           4.293642
+ 7: no_peer        East Asia & Pacific        10           3.402920
+ 8: no_peer      Europe & Central Asia        13           3.521057
+ 9: no_peer  Latin America & Caribbean        14           3.044309
+10: no_peer Middle East & North Africa         5           3.321601
+11: no_peer                 South Asia         3           3.637640
+12: no_peer         Sub-Saharan Africa        23           3.741879
+DISPLAY: borrowing_conditions/prose_5_1_5_2_20260921/build_figures.R 
+Both figure datasets reproduce checked content evidence.
+DISPLAY: borrowing_conditions/content_5_3_20260921/verify_content.R 
+        view analysis_year historical_income_level countries mean_rate
+      <char>         <int>                  <char>     <int>     <num>
+1:   no_peer          2024     Lower middle income        29  9.326159
+2: secondary          2024     Lower middle income        13  8.547643
+3:   no_peer          2024     Upper middle income        35  7.727884
+4: secondary          2024     Upper middle income        16  6.148307
+5:   primary          2024     Lower middle income         9  8.642877
+6:   primary          2024     Upper middle income        15  6.576478
+7:   no_peer          2024              Low income         7 11.252178
+8: secondary          2024              Low income         1  8.710000
+   median_rate       q25       q75
+         <num>     <num>     <num>
+1:    9.051000  8.235577 10.750000
+2:    8.770000  7.739544  9.623167
+3:    7.143869  6.039333  8.622203
+4:    6.289326  5.445062  6.773115
+5:    8.625000  8.235577 10.136364
+6:    6.335714  5.853875  7.262879
+7:   10.601075 10.106357 13.080485
+8:    8.710000  8.710000  8.710000
+Key: <analysis_year>
+   analysis_year Low income Lower middle income Upper middle income
+           <int>      <num>               <num>               <num>
+1:          2019   6.497712            6.503736              6.1613
+   records countries     slope
+     <int>     <int>     <num>
+1:     215        47 -1.457358
+DISPLAY: official_loan_data_and_valuation/content_20260921/verify_evidence.R 
+New names:
+• `` -> `...1`
+• `` -> `...2`
+• `` -> `...3`
+• `` -> `...4`
+• `` -> `...5`
+• `` -> `...6`
+                                            check passed
+                                           <char> <lgcl>
+ 1: CRS_4795_eligible_rows_3607_financing_records   TRUE
+ 2:           MPG_reference_specific_denominators   TRUE
+ 3:                          CRS_currency_unknown   TRUE
+ 4:                            CRS_pairing_unique   TRUE
+ 5:                          CRS_principal_repaid   TRUE
+ 6:         CRS_PV_recomputed_from_saved_payments   TRUE
+ 7:      All_main_loan_formula_results_reproduced   TRUE
+ 8:    AidData_original_coupon_and_total_maturity   TRUE
+ 9:               ADD_original_WB_span_plus_grace   TRUE
+10:                     MPG_original_WB_endpoints   TRUE
+11:               CRS_original_numeric_rate_dates   TRUE
+                             step records
+                           <char>   <num>
+1:           Eligible source rows    4795
+2: Consolidated financing records    3607
+3:      Usable selected benchmark    3509
+4:            Excluding peer-only    2686
+5:                Modern non-peer    1274
+                               application observations countries first_year
+                                    <char>        <int>     <int>      <int>
+ 1:                                    CRS         2686        85       2012
+ 2:                             CRS modern         1274        80       2018
+ 3:                                    mpg          462        65       2012
+ 4:     mpg standardized_DAC_category_rule          448        61       2012
+ 5:                             mpg fixed5          462        65       2012
+ 6:                                aiddata          164        37       2015
+ 7: aiddata standardized_DAC_category_rule          164        37       2015
+ 8:    aiddata modern_DAC_common_reference           68        27       2018
+ 9:                         aiddata fixed5          164        37       2015
+10:                                    add         1624        29       2015
+11:     add standardized_DAC_category_rule         1624        29       2015
+12:        add modern_DAC_common_reference         1176        29       2018
+13:                             add fixed5         1624        29       2015
+    last_year               unit
+        <int>             <char>
+ 1:      2024   financing record
+ 2:      2024   financing record
+ 3:      2014 source loan record
+ 4:      2014 source loan record
+ 5:      2014 source loan record
+ 6:      2023 source loan record
+ 7:      2023 source loan record
+ 8:      2023 source loan record
+ 9:      2023 source loan record
+10:      2024 source loan record
+11:      2024 source loan record
+12:      2024 source loan record
+13:      2024 source loan record
+DISPLAY: concessionality_results/prose_20260922/prepare_and_check.R 
+[1] "18 checks passed"
+DISPLAY: discussion_and_conclusion/prose_20260922/verify_evidence.R 
+7 evidence checks passed.

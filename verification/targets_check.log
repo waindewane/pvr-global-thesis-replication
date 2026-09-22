@@ -1,0 +1,16 @@
+→ de-duplicating _targets/meta/meta
+→ reading _targets/meta/meta
+→ parsing _targets/meta/meta
+→ noting builders and branches
+→ parsing _targets/meta/meta
+→ restricting metadata records
+→ querying 0 local files in _targets/objects
+→ parsing _targets/meta/process
++ replication_complete dispatched
+MASTER: running rating_nested
+MASTER: running peer_description
+ALL 27 ANALYSIS STAGES COMPLETED FROM REBUILT BENCHMARKS
+→ 1 targets ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  [49.5s, 1+, 0-]
+✔ replication_complete completed [49.5s, 8.10 kB]
+→ 1 targets ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  [49.5s, 1+, 0-]→ de-duplicating _targets/meta/meta
+→ 1 targets ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  [49.5s, 1+, 0-]✔ ended pipeline [49.5s, 1 completed, 0 skipped]

@@ -3,7 +3,7 @@ library(data.table);library(jsonlite)
 ref<-fromJSON('../tools/reference_run.json');new<-fromJSON('replication-results/current_run.json')
 checks<-list()
 compare<-function(label,old,now){
- files<-list.files(old,pattern='[.]csv$',recursive=TRUE)
+ files<-list.files(old,pattern='[.]csv([.]gz)?$',recursive=TRUE)
  files<-files[!grepl('manifest|receipt|snapshot|source_register|provenance|environment|hash|session|replay|artifact|inventory',files,ignore.case=TRUE)]
  for(f in files){
   if(!file.exists(file.path(now,f))){checks[[length(checks)+1L]]<<-data.frame(stage=label,file=f,passed=FALSE,detail='Missing rebuilt output');next}

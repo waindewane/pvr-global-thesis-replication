@@ -2,7 +2,7 @@
 
 Replication package for Markus Wane’s bachelor’s thesis, **Measuring Borrower-Side Concessionality: Constructing a Sovereign Market-Benchmark Dataset, 2012–2024**, as sent to the supervisor on 22 September 2026.
 
-[Read the thesis](paper/Thesis.pdf) · [Download the complete input snapshot](../../releases/tag/thesis-2026-09-22) · [Calculation map](CALCULATIONS.md) · [Verification record](VERIFICATION.md)
+[Read the thesis](paper/Thesis.pdf) · [Download the complete input snapshot](https://github.com/waindewane/pvr-global-thesis-replication/releases/tag/thesis-2026-09-22) · [Calculation map](CALCULATIONS.md) · [Verification record](VERIFICATION.md)
 
 This private repository contains the calculation code, original source files, curated inputs, comparison fixtures, manuscript sources and figure-generation code. All required data are attached to the release in this same repository. Large data files are stored as release assets rather than Git history. No additional data-access service is required.
 

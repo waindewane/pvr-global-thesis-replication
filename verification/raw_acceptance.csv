@@ -1,0 +1,7 @@
+check_id,passed
+all_stages_completed,TRUE
+raw_inputs_unchanged,TRUE
+baseline_outputs_unchanged,TRUE
+numeric_baseline_parity,TRUE
+case_review_applied,TRUE
+no_unapproved_ladder_promotion,TRUE
